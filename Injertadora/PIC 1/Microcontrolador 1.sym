@@ -1,0 +1,115 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020-021 limite_vuelta
+022-023 limite_vuelta_M3
+024-025 velocidad_motor
+026-027 valor_adc
+028-02B voltaje
+02C     @TRIS_C
+02D     main.i
+02E     main.j
+02F     main.j
+030     main.i
+031-034 @FLT.P1
+031-032 pasos_izquierda_M3.velocidad
+031-032 pasos_izquierda.velocidad
+031-032 @ITOF.P1
+031-032 pasos_derecha.velocidad
+031-032 pasos_derecha_M3.velocidad
+031-034 @MULFF.P1
+031     main.@SCRATCH1
+032     @delay_ms1.P1
+032     main.@SCRATCH2
+033     main.@SCRATCH3
+033     pasos_izquierda.@SCRATCH1
+033     pasos_derecha.@SCRATCH1
+033     pasos_izquierda_M3.@SCRATCH1
+033     pasos_derecha_M3.@SCRATCH1
+034     @delay_us1.P1
+034     main.@SCRATCH4
+035-038 @FLT.P1
+035-038 @MULFF.P2
+035-038 @DIVFF.P3
+039-03C @DIVFF.P1
+039     @MULFF.@SCRATCH1
+039     @FLT.@SCRATCH1
+03A     @MULFF.@SCRATCH2
+03A     @FLT.@SCRATCH2
+03B     @MULFF.@SCRATCH3
+03C     @MULFF.@SCRATCH4
+03D     @MULFF.@SCRATCH5
+03D     @DIVFF.@SCRATCH1
+03E     @DIVFF.@SCRATCH2
+03F     @DIVFF.@SCRATCH3
+040     @DIVFF.@SCRATCH4
+041     @DIVFF.@SCRATCH5
+042     @DIVFF.@SCRATCH6
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  pasos_off
+00001D  pasos_off_M3
+000026  @ITOF
+000045  @MULFF
+0000BC  @DIVFF
+000188  @FLT
+0001C9  @delay_us1
+0001D8  pasos_izquierda
+000219  pasos_izquierda_M3
+000242  pasos_derecha_M3
+00026B  pasos_derecha
+0002AC  @delay_ms1
+0002C0  main
+0002C0  @cinit1
+0002D5  @cinit2
+
+Project Directory:
+    C:\Users\Usuario\Desktop\Injertadora\PIC 1\
+
+Project Files:
+    Microcontrolador 1.c                                    [03-oct.-23 02:33  CRC=51C48F9B]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16f877a.h [15-ene.-18 14:53  CRC=63418C39]
+
+Source signature=1847A80D
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=E719
+
+Units:
+    Microcontrolador 1 (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   Microcontrolador 1.xsym
+    Errors:      Microcontrolador 1.err
+    Ext Symbols: Microcontrolador 1.esym
+    INHX8:       Microcontrolador 1.hex
+    Symbols:     Microcontrolador 1.sym
+    List:        Microcontrolador 1.lst
+    Debug/COFF:  Microcontrolador 1.cof
+    Project:     Microcontrolador 1.ccspjt
+    Call Tree:   Microcontrolador 1.tre
+    Statistics:  Microcontrolador 1.STA

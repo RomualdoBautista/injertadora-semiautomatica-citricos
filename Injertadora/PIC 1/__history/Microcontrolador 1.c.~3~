@@ -1,0 +1,136 @@
+#include <Microcontrolador 1.h>
+#device ADC = 10 ////
+#fuses HS,NOWDT,NOPROTECT,NOPUT,NOLVP,BROWNOUT
+#use delay(clock=20M)
+#use standard_io(A,C,D)
+
+#define MOTOR1_STEP PIN_C7
+#define MOTOR1_DIR PIN_C6
+#define MOTOR2_STEP PIN_C5
+#define MOTOR2_DIR PIN_C4
+#define MOTOR3_STEP PIN_D3
+#define MOTOR3_DIR PIN_D2
+
+long limite_vuelta = 200; // Numero de pasos para dar una vuelta
+long limite_vuelta_M3 = 200; 
+long velocidad_motor = 600; // Velocidad de giro del motor
+long valor_adc;
+float voltaje;
+void pasos_izquierda(unsigned long velocidad); // Declaracion de funciones
+void pasos_derecha(unsigned long velocidad);
+void pasos_off(void);
+void pasos_izquierda_M3(unsigned long velocidad); // Declaracion de funciones
+void pasos_derecha_M3(unsigned long velocidad);
+void pasos_off_M3(void);
+void servos(void);
+
+void main()
+{
+ pasos_off(); // Inicializa apagado el motor
+ pasos_off_M3(); // Inicializa apagado el motor
+ 
+ setup_adc_ports(AN0);
+ setup_adc(adc_clock_internal);
+ 
+ while(true)
+ {
+ set_adc_channel(0);
+ delay_us(2);
+ valor_adc = read_adc();
+ voltaje = (valor_adc*5.0)/1023.0;
+ 
+ if(voltaje > 4) // si el voltaje es mayor a 4 
+ { 
+ output_low(PIN_D1); //BANDA APAGADA
+ 
+ //////////////////////////////////////////////////////////////////////
+ for(int i=0; i<limite_vuelta; i++) // El motor 1 Y 2 giran hacia la izquierda
+ {
+ pasos_izquierda(velocidad_motor);
+ }
+ pasos_off(); // El motor se detiene por un momento
+ //////////////////////////////////////////////////////////////////////
+ for(int j=0; j<limite_vuelta_M3; j++) // El motor 3 gira hacia la izquierda
+ {
+ pasos_izquierda_M3(velocidad_motor);
+ }
+ pasos_off_M3(); // Finalmente el motor se detiene
+ 
+ for(int j=0; j<limite_vuelta_M3; j++) // El motor 3 gira hacia la derecha
+ {
+ pasos_derecha_M3(velocidad_motor);
+ }
+ pasos_off_M3(); // Finalmente el motor se detiene
+ 
+ //////////////////////////////////////////////////////////////////////
+ for(int i=0; i<limite_vuelta; i++) // El motor 1 Y 2 giran hacia la derecha
+ {
+ pasos_derecha(velocidad_motor);
+ }
+ pasos_off(); 
+ delay_ms(500);
+ //////////////////////////////////////////////////////////////////////
+ 
+ output_high(PIN_D1); 
+ delay_ms(3300);
+ output_low(PIN_D1);
+ delay_ms(20200);
+ }
+ 
+ else // en caso contrario
+ { 
+ output_high(PIN_D1); //BANDA ENCENDIDA
+ }
+ }
+}
+void pasos_izquierda(unsigned long velocidad) // Funcion de pasos hacia la izquierda
+{
+ output_high(MOTOR1_DIR);
+ output_high(MOTOR2_DIR);
+ output_high(MOTOR1_STEP);
+ output_high(MOTOR2_STEP);
+ delay_us(velocidad);
+ output_low(MOTOR1_STEP);
+ output_low(MOTOR2_STEP);
+ delay_us(velocidad);
+}
+void pasos_derecha(unsigned long velocidad) // Funcion de pasos a la derecha
+{
+ output_low(MOTOR1_DIR);
+ output_low(MOTOR2_DIR);
+ output_high(MOTOR1_STEP);
+ output_high(MOTOR2_STEP);
+ delay_us(velocidad);
+ output_low(MOTOR1_STEP);
+ output_low(MOTOR2_STEP);
+ delay_us(velocidad);
+}
+void pasos_off(void) // Funcion de detener
+{
+ output_low(MOTOR1_DIR);
+ output_low(MOTOR2_DIR);
+ output_low(MOTOR1_STEP);
+ output_low(MOTOR2_STEP);
+}
+///////////////////////////////////////////////////////////////////////////////
+void pasos_izquierda_M3(unsigned long velocidad) // Funcion de pasos hacia la izquierda
+{
+ output_high(MOTOR3_DIR);
+ output_high(MOTOR3_STEP);
+ delay_us(velocidad);
+ output_low(MOTOR3_STEP);
+ delay_us(velocidad);
+}
+void pasos_derecha_M3(unsigned long velocidad) // Funcion de pasos a la derecha
+{
+ output_low(MOTOR3_DIR);
+ output_high(MOTOR3_STEP);
+ delay_us(velocidad);
+ output_low(MOTOR3_STEP);
+ delay_us(velocidad);
+}
+void pasos_off_M3(void) // Funcion de detener
+{
+ output_low(MOTOR3_DIR);
+ output_low(MOTOR3_STEP);
+}

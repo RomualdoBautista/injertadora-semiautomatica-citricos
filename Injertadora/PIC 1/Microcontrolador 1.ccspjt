@@ -1,0 +1,43 @@
+[PROJECT]
+Target=Microcontrolador 1.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.076
+Compiler=PCM
+CCSVersion=5.076
+[Target Data]
+FileList=Microcontrolador 1.c
+[Directories]
+Include=
+[C:\Users\Usuario\Desktop\Injertadora\PIC 1\Microcontrolador 1]
+Type=4
+[mru-list]
+1=Microcontrolador 1.c
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=1
+D1=03-10-2023
+D1_L=4
+D1_L1=[8673]Project Opened.
+D1_L2=[8953]Started Editing.
+D1_L3=[9514]Stopped Editing.
+TotalEdit=5
+TotalDebug=0
+D1_E=5
+D1_D=0
+D1_L4=[9822]Project Closed.
+
+[Opened Files]
+1=Microcontrolador 1.c
+t1=1
+Count=1
+[Microcontrolador 1.c]
+Type=4
+[Units]
+Count=1
+1=Microcontrolador 1 (main)
+
+[defines]
+buildcount=1
